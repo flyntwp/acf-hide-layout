@@ -2,18 +2,22 @@
     'use strict';
 
     window.acf.addAction('ready_field/type=flexible_content', function (field) {
+        var hidden_layouts = window.acf_hide_layout_options.hidden_layouts[field.data.key];
+
         // for each layout in the flexible field
         field.$el.find('.layout').each(function (i, element) {
             var $el = $(element),
                 $controls = $el.find('.acf-fc-layout-controls'),
                 index = $el.attr('data-id'),
-                name = 'acf[' + field.data.key + '][' + index + '][acf_hide_layout]';
+                name = 'acf[' + field.data.key + '][' + index + '][acf_hide_layout]',
+                in_array = $.inArray(index, hidden_layouts) !== -1,
+                is_hidden = in_array && index !== 'acfcloneindex';
 
             var $input = $('<input>', {
                 type: 'hidden',
                 name: name,
                 class: 'acf-hide-layout',
-                value: '0',
+                value: is_hidden ? '1' : '0',
             });
 
             var $action = $('<a>', {
@@ -26,6 +30,10 @@
 
             $action.prepend($input);
             $controls.prepend($action);
+
+            if ( is_hidden ) {
+                $el.addClass('acf-layout-hidden');
+            }
         });
     });
 
@@ -39,4 +47,5 @@
         $input.val(newValue);
         $layout.toggleClass('acf-layout-hidden', newValue);
     });
+
 })(jQuery);

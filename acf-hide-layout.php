@@ -25,6 +25,14 @@ class ACF_Hide_Layout {
 	protected static $instance = null;
 
 	/**
+	 * Field key.
+	 *
+	 * @since  	1.0
+	 * @access 	protected
+	 */
+	protected $field_key = 'acf_hide_layout';
+
+	/**
 	 * A dummy magic method to prevent class from being cloned.
 	 *
 	 * @since  	1.0
@@ -113,6 +121,18 @@ class ACF_Hide_Layout {
 	}
 
 	/**
+     * Get field key.
+     *
+     * @since   1.0
+     * @access  public
+	 *
+     * @return  string Field key.
+     */
+    public function get_field_key() {
+        return $this->field_key;
+	}
+
+	/**
 	 * Hook into actions and filters.
 	 *
 	 * @since  	1.0
@@ -122,6 +142,7 @@ class ACF_Hide_Layout {
 		add_action( 'init', [ $this, 'init' ], 0 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_footer', [ $this, 'admin_footer'] );
+		add_filter( 'acf/update_value/type=flexible_content', [ $this, 'update_value'], 10, 4 );
 	}
 
 	/**
@@ -176,6 +197,51 @@ class ACF_Hide_Layout {
 	 */
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain( 'acf-hide-layout', false, plugin_basename( dirname( $this->file ) ) . '/languages' );
+	}
+
+	/**
+	 * Update the field acf_hide_layout value.
+	 *
+	 * @since  	1.0
+	 * @access 	public
+	 *
+	 * @param 	mixed $rows The value to update.
+	 * @param	string $post_id The post ID for this value.
+	 * @param	array $field The field array.
+	 * @param	mixed $original The original value before modification.
+	 *
+	 * @return 	mixed $rows
+	 */
+	public function update_value( $rows, $post_id, $field, $original ) {
+
+		// bail early if no layouts or empty values
+		if ( empty( $field['layouts'] ) || empty( $rows ) ) {
+			return $rows;
+		}
+
+		unset( $rows['acfcloneindex'] );
+
+		$rows = array_values( $rows);
+		$field_key = $this->get_field_key();
+
+		foreach ( $rows as $key => $row ) {
+
+			// bail early if no layout reference
+			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) ) {
+				continue;
+			}
+
+			$hide_layout_field = [
+				'name' => "{$field['name']}_{$key}_{$field_key}",
+				'key' => "field_{$field_key}",
+			];
+
+			$new_value = $row[ $field_key ];
+
+			acf_update_value( $new_value, $post_id, $hide_layout_field );
+		}
+
+		return $rows;
 	}
 }
 

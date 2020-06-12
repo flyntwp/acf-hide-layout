@@ -1,5 +1,5 @@
 === ACF Hide Layout ===
-Contributors: bleech
+Contributors: bleechberlin
 Tags: acf, advanced custom fields, flexible content, hide layout
 Requires at least: 4.7
 Tested up to: 5.4
@@ -32,7 +32,7 @@ Toggling that option will hide or show the layout on the fronted.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/acf-hide-layout` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 
 == Development ==

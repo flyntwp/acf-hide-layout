@@ -129,40 +129,40 @@ class ACF_Hide_Layout {
 	}
 
 	/**
-     * Get field key.
-     *
-     * @since   1.0
-     * @access  public
+	 * Get field key.
 	 *
-     * @return  string Field key.
-     */
-    public function get_field_key() {
-        return $this->field_key;
+	 * @since   1.0
+	 * @access  public
+	 *
+	 * @return  string Field key.
+	 */
+	public function get_field_key() {
+		return $this->field_key;
 	}
 
 	/**
-     * Get hidden layouts.
-     *
-     * @since   1.0
-     * @access  public
+	 * Get hidden layouts.
 	 *
-     * @return  array Hidden layouts.
-     */
-    public function get_hidden_layouts() {
-        return $this->hidden_layouts;
+	 * @since   1.0
+	 * @access  public
+	 *
+	 * @return  array Hidden layouts.
+	 */
+	public function get_hidden_layouts() {
+		return $this->hidden_layouts;
 	}
 
 	/**
-     * Set hidden layout.
-     *
-     * @since   1.0
-     * @access  public
+	 * Set hidden layout.
+	 *
+	 * @since   1.0
+	 * @access  public
 	 *
 	 * @param  	string $field_key
 	 * @param  	int $row
-     */
-    public function set_hidden_layout( $field_key, $row ) {
-        $this->hidden_layouts[ $field_key ][] = 'row-' . $row;
+	 */
+	public function set_hidden_layout( $field_key, $row ) {
+		$this->hidden_layouts[ $field_key ][] = 'row-' . $row;
 	}
 
 	/**
@@ -172,7 +172,7 @@ class ACF_Hide_Layout {
 	 * @see https://github.com/woocommerce/woocommerce/blob/master/includes/class-woocommerce.php#L304
 	 *
 	 * @since   1.0
-     * @access  public
+	 * @access  public
 	 *
 	 * @param  	string $type admin, ajax, cron or frontend.
 	 *

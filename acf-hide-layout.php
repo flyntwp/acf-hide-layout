@@ -19,32 +19,32 @@ class ACF_Hide_Layout {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @since  	1.0
-	 * @access 	protected
+	 * @since  1.0
+	 * @access protected
 	 */
 	protected static $instance = null;
 
 	/**
 	 * Field key.
 	 *
-	 * @since  	1.0
-	 * @access 	protected
+	 * @since  1.0
+	 * @access protected
 	 */
 	protected $field_key = 'acf_hide_layout';
 
 	/**
 	 * Layouts that will be hidden.
 	 *
-	 * @since  	1.0
-	 * @access 	protected
+	 * @since  1.0
+	 * @access protected
 	 */
 	protected $hidden_layouts = [];
 
 	/**
 	 * A dummy magic method to prevent class from being cloned.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 */
 	public function __clone() {
 		_doing_it_wrong( __FUNCTION__, 'Cheatin&#8217; huh?', '1.0.0' );
@@ -53,8 +53,8 @@ class ACF_Hide_Layout {
 	/**
 	 * A dummy magic method to prevent class from being unserialized.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 */
 	public function __wakeup() {
 		_doing_it_wrong( __FUNCTION__, 'Cheatin&#8217; huh?', '1.0.0' );
@@ -65,10 +65,10 @@ class ACF_Hide_Layout {
 	 *
 	 * Ensures only one instance is loaded or can be loaded.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @return 	Main instance.
+	 * @return Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -80,8 +80,8 @@ class ACF_Hide_Layout {
 	/**
 	 * Constructor.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 */
 	public function __construct() {
 
@@ -94,10 +94,10 @@ class ACF_Hide_Layout {
 	/**
 	 * Get the plugin url.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @return 	string
+	 * @return string
 	 */
 	public function get_plugin_url() {
 		return plugin_dir_url( $this->file );
@@ -106,10 +106,10 @@ class ACF_Hide_Layout {
 	/**
 	 * Get the plugin path.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @return 	string
+	 * @return string
 	 */
 	public function get_plugin_path() {
 		return plugin_dir_path( $this->file );
@@ -118,10 +118,10 @@ class ACF_Hide_Layout {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @return 	string
+	 * @return string
 	 */
 	public function get_version() {
 		$plugin_data = get_file_data( $this->file, [ 'Version' => 'Version' ], 'plugin' );
@@ -131,10 +131,10 @@ class ACF_Hide_Layout {
 	/**
 	 * Get field key.
 	 *
-	 * @since   1.0
-	 * @access  public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @return  string Field key.
+	 * @return string Field key.
 	 */
 	public function get_field_key() {
 		return $this->field_key;
@@ -143,10 +143,10 @@ class ACF_Hide_Layout {
 	/**
 	 * Get hidden layouts.
 	 *
-	 * @since   1.0
-	 * @access  public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @return  array Hidden layouts.
+	 * @return array Hidden layouts.
 	 */
 	public function get_hidden_layouts() {
 		return $this->hidden_layouts;
@@ -155,11 +155,11 @@ class ACF_Hide_Layout {
 	/**
 	 * Set hidden layout.
 	 *
-	 * @since   1.0
-	 * @access  public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @param  	string $field_key
-	 * @param  	int $row
+	 * @param  string $field_key
+	 * @param  int $row
 	 */
 	public function set_hidden_layout( $field_key, $row ) {
 		$this->hidden_layouts[ $field_key ][] = 'row-' . $row;
@@ -171,12 +171,12 @@ class ACF_Hide_Layout {
 	 * Thanks WooCommerce
 	 * @see https://github.com/woocommerce/woocommerce/blob/master/includes/class-woocommerce.php#L304
 	 *
-	 * @since   1.0
-	 * @access  public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @param  	string $type admin, ajax, cron or frontend.
+	 * @param  string $type admin, ajax, cron or frontend.
 	 *
-	 * @return 	bool
+	 * @return bool
 	 */
 	public function is_request( $type ) {
 		switch ( $type ) {
@@ -194,8 +194,8 @@ class ACF_Hide_Layout {
 	/**
 	 * Hook into actions and filters.
 	 *
-	 * @since  	1.0
-	 * @access 	private
+	 * @since  1.0
+	 * @access private
 	 */
 	private function init_hooks() {
 		add_action( 'init', [ $this, 'init' ], 0 );
@@ -208,8 +208,8 @@ class ACF_Hide_Layout {
 	/**
 	 * Init when WordPress Initialises.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 */
 	public function init() {
 		// Set up localisation.
@@ -219,8 +219,8 @@ class ACF_Hide_Layout {
 	/**
 	 * Enqueue scripts.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 */
 	public function enqueue_scripts() {
 		$assets_url     = $this->get_plugin_url() . 'assets/';
@@ -235,8 +235,8 @@ class ACF_Hide_Layout {
 	 *
 	 * admin_enqueue_scripts is to early for hidden layouts.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 */
 	public function admin_footer() {
 
@@ -253,8 +253,8 @@ class ACF_Hide_Layout {
 	/**
 	 * Load Localisation files.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 */
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain( 'acf-hide-layout', false, plugin_basename( dirname( $this->file ) ) . '/languages' );
@@ -263,14 +263,14 @@ class ACF_Hide_Layout {
 	/**
 	 * Remove layouts that are hidden from frontend.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @param	mixed $layouts The value to preview.
-	 * @param	string $post_id The post ID for this value.
-	 * @param	array $field The field array.
+	 * @param  mixed $layouts The value to preview.
+	 * @param  string $post_id The post ID for this value.
+	 * @param  array $field The field array.
 	 *
-	 * @return 	array $layouts
+	 * @return array $layouts
 	 */
 	public function load_value( $layouts, $post_id, $field ) {
 
@@ -309,15 +309,15 @@ class ACF_Hide_Layout {
 	/**
 	 * Update the field acf_hide_layout value.
 	 *
-	 * @since  	1.0
-	 * @access 	public
+	 * @since  1.0
+	 * @access public
 	 *
-	 * @param 	mixed $rows The value to update.
-	 * @param	string $post_id The post ID for this value.
-	 * @param	array $field The field array.
-	 * @param	mixed $original The original value before modification.
+	 * @param  mixed $rows The value to update.
+	 * @param  string $post_id The post ID for this value.
+	 * @param  array $field The field array.
+	 * @param  mixed $original The original value before modification.
 	 *
-	 * @return 	mixed $rows
+	 * @return mixed $rows
 	 */
 	public function update_value( $rows, $post_id, $field, $original ) {
 

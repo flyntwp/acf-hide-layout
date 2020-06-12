@@ -33,6 +33,14 @@ class ACF_Hide_Layout {
 	protected $field_key = 'acf_hide_layout';
 
 	/**
+	 * Layouts that will be hidden.
+	 *
+	 * @since  	1.0
+	 * @access 	protected
+	 */
+	protected $hidden_layouts = [];
+
+	/**
 	 * A dummy magic method to prevent class from being cloned.
 	 *
 	 * @since  	1.0
@@ -133,6 +141,57 @@ class ACF_Hide_Layout {
 	}
 
 	/**
+     * Get hidden layouts.
+     *
+     * @since   1.0
+     * @access  public
+	 *
+     * @return  array Hidden layouts.
+     */
+    public function get_hidden_layouts() {
+        return $this->hidden_layouts;
+	}
+
+	/**
+     * Set hidden layout.
+     *
+     * @since   1.0
+     * @access  public
+	 *
+	 * @param  	string $field_key
+	 * @param  	int $row
+     */
+    public function set_hidden_layout( $field_key, $row ) {
+        $this->hidden_layouts[ $field_key ][] = 'row-' . $row;
+	}
+
+	/**
+	 * What type of request is this?
+	 *
+	 * Thanks WooCommerce
+	 * @see https://github.com/woocommerce/woocommerce/blob/master/includes/class-woocommerce.php#L304
+	 *
+	 * @since   1.0
+     * @access  public
+	 *
+	 * @param  	string $type admin, ajax, cron or frontend.
+	 *
+	 * @return 	bool
+	 */
+	public function is_request( $type ) {
+		switch ( $type ) {
+			case 'admin':
+				return is_admin();
+			case 'ajax':
+				return wp_doing_ajax();
+			case 'cron':
+				return defined( 'DOING_CRON' );
+			case 'frontend':
+				return ( ! is_admin() || wp_doing_ajax() ) && ! defined( 'DOING_CRON' ) && ! wp_is_json_request();
+		}
+	}
+
+	/**
 	 * Hook into actions and filters.
 	 *
 	 * @since  	1.0
@@ -142,6 +201,7 @@ class ACF_Hide_Layout {
 		add_action( 'init', [ $this, 'init' ], 0 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_footer', [ $this, 'admin_footer'] );
+		add_filter( 'acf/load_value/type=flexible_content', [ $this, 'load_value'], 10, 3 );
 		add_filter( 'acf/update_value/type=flexible_content', [ $this, 'update_value'], 10, 4 );
 	}
 
@@ -181,6 +241,7 @@ class ACF_Hide_Layout {
 	public function admin_footer() {
 
 		$args = [
+			'hidden_layouts' => $this->get_hidden_layouts(),
 			'i18n' => [
 				'hide_layout' => esc_html__( 'Hide / Show Layout', 'acf-hide-layout' ),
 			],
@@ -197,6 +258,52 @@ class ACF_Hide_Layout {
 	 */
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain( 'acf-hide-layout', false, plugin_basename( dirname( $this->file ) ) . '/languages' );
+	}
+
+	/**
+	 * Remove layouts that are hidden from frontend.
+	 *
+	 * @since  	1.0
+	 * @access 	public
+	 *
+	 * @param	mixed $layouts The value to preview.
+	 * @param	string $post_id The post ID for this value.
+	 * @param	array $field The field array.
+	 *
+	 * @return 	array $layouts
+	 */
+	public function load_value( $layouts, $post_id, $field ) {
+
+		// bail early if no layouts
+		if ( empty( $layouts ) ) {
+			return $layouts;
+		}
+
+		// value must be an array
+		$layouts = acf_get_array( $layouts );
+		$field_key = $this->get_field_key();
+
+		foreach ( $layouts as $row => $layout ) {
+
+			$hide_layout_field = [
+				'name' => "{$field['name']}_{$row}_{$field_key}",
+				'key' => "field_{$field_key}",
+			];
+
+			$is_hidden = acf_get_value( $post_id, $hide_layout_field );
+
+			if ( $is_hidden ) {
+				// used only on admin for javascript
+				$this->set_hidden_layout( $field['key'], $row );
+
+				// hide layout on frontend
+				if ( $this->is_request( 'frontend' ) ) {
+					unset( $layouts[ $row ] );
+				}
+			}
+		}
+
+		return $layouts;
 	}
 
 	/**

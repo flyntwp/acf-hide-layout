@@ -1,11 +1,11 @@
 <?php
 /*
  * Plugin Name: ACF Hide Layout
- * Plugin URI: http://wordpress.org/plugins/acf-hide-layout-image-optimizer/
+ * Plugin URI: https://wordpress.org/plugins/acf-hide-layout/
  * Description: This plugin allows you to hide flexible content layout on the frontend.
  * Tags: acf, advanced custom fields, flexible content, hide layout
  * Version: 1.0
- * Author: Bleech
+ * Author: bleech_
  * Author URI: https://bleech.de
  * Text Domain: acf-hide-layout
  * Domain Path: /languages

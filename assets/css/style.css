@@ -18,6 +18,11 @@
 }
 
 /* Make hidden layout look "hidden" */
+.acf-layout-hidden .acf-fields {
+    opacity: 0.7;
+}
+
 .acf-layout-hidden .acf-fc-layout-handle {
     background: rgba(0,0,0,.02);
+    opacity: .7;
 }

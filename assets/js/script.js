@@ -1,0 +1,42 @@
+(function ($) {
+    'use strict';
+
+    window.acf.addAction('ready_field/type=flexible_content', function (field) {
+        // for each layout in the flexible field
+        field.$el.find('.layout').each(function (i, element) {
+            var $el = $(element),
+                $controls = $el.find('.acf-fc-layout-controls'),
+                index = $el.attr('data-id'),
+                name = 'acf[' + field.data.key + '][' + index + '][acf_hide_layout]';
+
+            var $input = $('<input>', {
+                type: 'hidden',
+                name: name,
+                class: 'acf-hide-layout',
+                value: '0',
+            });
+
+            var $action = $('<a>', {
+                'data-index': index,
+                'data-name': 'hide-layout',
+                href: '#',
+                title: window.acf_hide_layout_options.i18n.hide_layout,
+                class: 'acf-icon dashicons acf-hide-layout small light acf-js-tooltip',
+            });
+
+            $action.prepend($input);
+            $controls.prepend($action);
+        });
+    });
+
+    $(document).on('click', '.acf-hide-layout', function () {
+        var $el = $(this),
+            $layout = $el.parents('.layout'),
+            $input = $el.find('.acf-hide-layout'),
+            value = $input.val(),
+            newValue = value === '1' ? '0' : '1';
+
+        $input.val(newValue);
+        $layout.toggleClass('acf-layout-hidden', newValue);
+    });
+})(jQuery);

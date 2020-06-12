@@ -1,0 +1,23 @@
+.acf-icon.acf-hide-layout:before {
+    content: '\f530';
+    font-family: inherit;
+}
+
+.acf-layout-hidden .acf-icon.acf-hide-layout:before {
+    content: '\f177';
+    font-family: inherit;
+}
+
+.acf-flexible-content .layout .acf-fc-layout-controls .acf-icon.acf-hide-layout {
+    visibility: hidden;
+}
+
+.acf-flexible-content .layout:hover .acf-fc-layout-controls .acf-icon.acf-hide-layout,
+.acf-flexible-content .layout.-hover .acf-fc-layout-controls .acf-icon.acf-hide-layout {
+    visibility: visible;
+}
+
+/* Make hidden layout look "hidden" */
+.acf-layout-hidden .acf-fc-layout-handle {
+    background: rgba(0,0,0,.02);
+}

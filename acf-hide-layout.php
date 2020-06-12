@@ -121,6 +121,7 @@ class ACF_Hide_Layout {
 	private function init_hooks() {
 		add_action( 'init', [ $this, 'init' ], 0 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'admin_footer', [ $this, 'admin_footer'] );
 	}
 
 	/**
@@ -146,6 +147,25 @@ class ACF_Hide_Layout {
 
 		wp_enqueue_style( 'acf-hide-layout', $assets_url . 'css/style.css', [], $plugin_version );
 		wp_enqueue_script( 'acf-hide-layout', $assets_url . 'js/script.js', ['jquery'], $plugin_version, true );
+	}
+
+	/**
+	 * Add script options.
+	 *
+	 * admin_enqueue_scripts is to early for hidden layouts.
+	 *
+	 * @since  	1.0
+	 * @access 	public
+	 */
+	public function admin_footer() {
+
+		$args = [
+			'i18n' => [
+				'hide_layout' => esc_html__( 'Hide / Show Layout', 'acf-hide-layout' ),
+			],
+		];
+
+		wp_localize_script( 'acf-hide-layout', 'acf_hide_layout_options', $args );
 	}
 
 	/**

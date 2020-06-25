@@ -24,7 +24,7 @@ Toggling that option will hide or show the layout on the fronted.
 
 ## Publish the plugin to wordpress.org
 
-To publish the plugin to the official wordpress.org page we will need to use SVN. Read more about about [using subversion with WordPress](https://developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/)
+To publish the plugin to the official [wordpress.org/plugins/acf-hide-layout/](https://wordpress.org/plugins/acf-hide-layout/) page we will need to use SVN. Read more about about [using subversion with WordPress](https://developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/)
 
 SVN and the Plugin Directory are a release repository. Unlike Git, you shouldn’t commit every small change, as doing so can degrade performance. Please only push finished changes to your SVN repository.
 

@@ -12,11 +12,9 @@ Easily hide the layout of the flexible content on the frontend but still keep it
 
 == Description ==
 
-Sometimes you may need to hide/remove a flexible content layout from showing on the frontend of the website,
-but you would still like to keep it in the backend in case you need to re-enable that layout again in the future.
-Of course you can always just remove the layout, but if it’s a complex group of fields with a lot of data,
-re-creating it later would be a pain. And here the **ACF Hide Layout** plugin comes into play. It adds a small button
-with an "eye" icon to easily disable/enable flexible layout content without removing it.
+Sometimes you may need to hide/remove a flexible content layout from showing on the frontend of the website, but you would still like to keep it in the backend in case you need to re-enable that layout again in the future.
+
+Of course you can always just remove the layout, but if it’s a complex group of fields with a lot of data, re-creating it later would be a pain. And here the **ACF Hide Layout** plugin comes into play. It adds a small button with an "eye" icon to easily disable/enable flexible layout content without removing it.
 
 == Frequently Asked Questions ==
 
@@ -24,6 +22,12 @@ with an "eye" icon to easily disable/enable flexible layout content without remo
 
 Next to the flexible content options "Add Layout" and "Remove Layout" is a new option "Hide / Show Layout".
 Toggling that option will hide or show the layout on the fronted.
+
+== Screenshots ==
+
+1. Content visible on the frontend
+2. Option to hide the layout
+3. Hidden content on the frontend
 
 == Requirements ==
 

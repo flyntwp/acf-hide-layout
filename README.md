@@ -30,7 +30,7 @@ SVN and the Plugin Directory are a release repository. Unlike Git, you shouldnâ€
 
 SVN uses the wordpress.org account username and password. The username is bleechberlin. For the initital commit SVN might ask for password for a different username (usually your OS username) but just enter empty password and then you can enter new username and password.
 
-0. Dont't forget to update the plugin version in the `acf-hide-layout.php` and in the `readme.txt`.
+0. Dont't forget to update the plugin version in the `acf-hide-layout.php` and in the `readme.txt`. Don't update plugin version if you are only updating readme.txt and images in `svn/assets`.
 1. Make sure you have SVN installed.
     * To install it with homebrew run `brew install subversion`.
 2. Run `./run svn_setup`.

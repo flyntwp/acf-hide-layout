@@ -1,0 +1,20 @@
+#!/bin/sh
+
+SVN_URL='http://plugins.svn.wordpress.org/acf-hide-layout/'
+
+svn_setup()
+{
+    svn co $SVN_URL svn
+}
+
+svn_update_trunk()
+{
+    rsync -chaL --delete --info=progress2 --exclude-from 'svn-exclude-list.txt' ./ svn/trunk
+}
+
+set -x
+if [ "$1" == "svn_setup" ]; then
+    svn_setup
+elif [ "$1" == "svn_update_trunk" ]; then
+    svn_update_trunk
+fi

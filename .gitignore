@@ -1,6 +1,9 @@
 # Composer
 /vendor
 
+# SVN
+/svn
+
 # WP-CLI
 wp-cli.local.yml
 

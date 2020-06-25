@@ -1,5 +1,7 @@
 # ACF Hide Layout
 
+https://flyntwp.com/acf-hide-layout/
+
 Easily hide the layout of the flexible content on the frontend but still keep it in the backend.
 
 Sometimes you may need to hide/remove a flexible content layout from showing on the frontend of the website,

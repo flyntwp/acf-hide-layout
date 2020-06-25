@@ -28,7 +28,7 @@ To publish the plugin to the official [wordpress.org/plugins/acf-hide-layout/](h
 
 SVN and the Plugin Directory are a release repository. Unlike Git, you shouldn’t commit every small change, as doing so can degrade performance. Please only push finished changes to your SVN repository.
 
-SVN uses the wordpress.org account username and password. It might aks for password for you u
+SVN uses the wordpress.org account username and password. The username is bleechberlin. For the initital commit SVN might ask for password for a different username (usually your OS username) but just enter empty password and then you can enter new username and password.
 
 0. Dont't forget to update the plugin version in the `acf-hide-layout.php` and in the `readme.txt`.
 1. Make sure you have SVN installed.

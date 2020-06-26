@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2020-06-24T08:56:47+00:00\n"
-"PO-Revision-Date: 2020-06-24 11:06+0200\n"
+"PO-Revision-Date: 2020-06-26 09:37+0200\n"
 "X-Generator: Poedit 2.3.1\n"
 "X-Domain: acf-hide-layout\n"
 "Last-Translator: \n"
@@ -23,7 +23,7 @@ msgstr "ACF verberg lay-out"
 
 #. Plugin URI of the plugin
 msgid "https://flyntwp.com/acf-hide-layout/"
-msgstr ""
+msgstr "https://flyntwp.com/acf-hide-layout/"
 
 #. Description of the plugin
 msgid ""
@@ -35,11 +35,11 @@ msgstr ""
 
 #. Author of the plugin
 msgid "bleech"
-msgstr ""
+msgstr "bleech"
 
 #. Author URI of the plugin
 msgid "https://bleech.de/"
-msgstr ""
+msgstr "https://bleech.de/"
 
 #: acf-hide-layout.php:246
 msgid "Hide / Show Layout"

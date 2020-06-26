@@ -3,7 +3,7 @@ Contributors: bleechberlin
 Tags: acf, advanced custom fields, flexible content, hide layout
 Requires at least: 4.7
 Tested up to: 5.4
-Stable tag: 1.0
+Stable tag: 1.0.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -43,7 +43,13 @@ Toggling that option will hide or show the layout on the fronted.
 
 The source code can be found on [GitHub](https://github.com/flyntwp/acf-hide-layout).
 
+Made by people who brought to you [Flynt - The Component Based WordPress Starter Theme](https://flyntwp.com/?utm_source=WordPress%20Plugin&20Directory&utm_medium=Link&utm_campaign=ACF%20Hide%20Layout%20Plugin)
+
 == Changelog ==
+
+= 1.0.1 =
+* Added German translation
+* Updated Greek and Dutch translations
 
 = 1.0 =
 * Initial Release

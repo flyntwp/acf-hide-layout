@@ -42,6 +42,7 @@ SVN uses the wordpress.org account username and password. The username is bleech
     * `svn status` See status of files, e.g. which are added (A), modified(M) or not added(?)
     * `svn add trunk/*` Adds all files in the trunk folder
     * `svn ci -m 'feat: add something new'` Commits and pushes the changes
+    * `svn cp trunk tags/1.1` Create tag 1.1. Commit it `svn ci -m "tagging version 1.1"`
 
 Read more about ["Tagging" New Versions](https://developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/#tagging-new-versions)
 

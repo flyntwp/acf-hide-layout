@@ -16,6 +16,8 @@ Sometimes you may need to hide/remove a flexible content layout from showing on 
 
 Of course you can always just remove the layout, but if it’s a complex group of fields with a lot of data, re-creating it later would be a pain. And here the **ACF Hide Layout** plugin comes into play. It adds a small button with an "eye" icon to easily disable/enable flexible layout content without removing it.
 
+See more info on the [plugin website](https://flyntwp.com/acf-hide-layout/)
+
 == Frequently Asked Questions ==
 
 = How to use it? =
@@ -43,7 +45,7 @@ Toggling that option will hide or show the layout on the fronted.
 
 The source code can be found on [GitHub](https://github.com/flyntwp/acf-hide-layout).
 
-Made by people who brought to you [Flynt - The Component Based WordPress Starter Theme](https://flyntwp.com/?utm_source=WordPress%20Plugin&20Directory&utm_medium=Link&utm_campaign=ACF%20Hide%20Layout%20Plugin)
+Made by people who brought to you [Flynt - The Component Based WordPress Starter Theme](https://flyntwp.com/?utm_source=WordPress%20Plugin%20Directory&utm_medium=Link&utm_campaign=ACF%20Hide%20Layout%20Plugin)
 
 == Changelog ==
 

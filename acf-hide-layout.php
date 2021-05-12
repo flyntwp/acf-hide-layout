@@ -199,7 +199,7 @@ class ACF_Hide_Layout {
 	 */
 	private function init_hooks() {
 		add_action( 'init', [ $this, 'init' ], 0 );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_footer', [ $this, 'admin_footer'] );
 		add_filter( 'acf/load_value/type=flexible_content', [ $this, 'load_value'], 10, 3 );
 		add_filter( 'acf/update_value/type=flexible_content', [ $this, 'update_value'], 10, 4 );

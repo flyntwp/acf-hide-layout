@@ -334,7 +334,7 @@ class ACF_Hide_Layout {
 		foreach ( $rows as $key => $row ) {
 
 			// bail early if no layout reference
-			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) ) {
+			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) || !isset( $row[ $field_key ] ) ) {
 				continue;
 			}
 

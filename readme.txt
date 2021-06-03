@@ -2,8 +2,8 @@
 Contributors: bleechberlin
 Tags: acf, advanced custom fields, flexible content, hide layout
 Requires at least: 4.7
-Tested up to: 5.5
-Stable tag: 1.0.1
+Tested up to: 5.7.2
+Stable tag: 1.1.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

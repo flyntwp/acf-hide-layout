@@ -4,7 +4,7 @@
  * Plugin URI: https://flyntwp.com/acf-hide-layout/
  * Description: Easily hide the layout of the flexible content on the frontend but still keep it in the backend.
  * Tags: acf, advanced custom fields, flexible content, hide layout
- * Version: 1.0.1
+ * Version: 1.1.1
  * Author: bleech
  * Author URI: https://bleech.de/
  * Text Domain: acf-hide-layout
@@ -320,11 +320,11 @@ class ACF_Hide_Layout {
 	 * @return mixed $rows
 	 */
 	public function update_value( $rows, $post_id, $field, $original ) {
-		
+
 		// bail early if no layouts or empty values
 		if ( empty( $field['layouts'] ) || empty( $rows ) ) {
 			return $rows;
-		}		
+		}
 
 		unset( $rows['acfcloneindex'] );
 
@@ -333,7 +333,7 @@ class ACF_Hide_Layout {
 
 		foreach ( $rows as $key => $row ) {
 
-			// bail early if no layout reference			
+			// bail early if no layout reference
 			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) || !isset( $row[ $field_key ] ) ) {
 				continue;
 			}
@@ -343,7 +343,7 @@ class ACF_Hide_Layout {
 				'key' => "field_{$field_key}",
 			];
 
-			$new_value = $row[ $field_key ];			
+			$new_value = $row[ $field_key ];
 
 			acf_update_value( $new_value, $post_id, $hide_layout_field );
 		}

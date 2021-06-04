@@ -1,4 +1,4 @@
-if(acf){
+if(window.acf){
     window.acf.addAction( 'ready_field/type=flexible_content', function( field ) {
 		
 		var fieldKey = '';

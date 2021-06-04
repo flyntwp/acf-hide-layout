@@ -199,7 +199,7 @@ class ACF_Hide_Layout {
 	 */
 	private function init_hooks() {
 		add_action( 'init', [ $this, 'init' ], 0 );
-		add_action( 'acf/input/admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_footer', [ $this, 'admin_footer'] );
 		add_filter( 'acf/load_value/type=flexible_content', [ $this, 'load_value'], 10, 3 );
 		add_filter( 'acf/update_value/type=flexible_content', [ $this, 'update_value'], 10, 4 );
@@ -320,11 +320,11 @@ class ACF_Hide_Layout {
 	 * @return mixed $rows
 	 */
 	public function update_value( $rows, $post_id, $field, $original ) {
-
+		
 		// bail early if no layouts or empty values
 		if ( empty( $field['layouts'] ) || empty( $rows ) ) {
 			return $rows;
-		}
+		}		
 
 		unset( $rows['acfcloneindex'] );
 
@@ -333,8 +333,8 @@ class ACF_Hide_Layout {
 
 		foreach ( $rows as $key => $row ) {
 
-			// bail early if no layout reference
-			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) ) {
+			// bail early if no layout reference			
+			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) || !isset( $row[ $field_key ] ) ) {
 				continue;
 			}
 
@@ -343,7 +343,7 @@ class ACF_Hide_Layout {
 				'key' => "field_{$field_key}",
 			];
 
-			$new_value = $row[ $field_key ];
+			$new_value = $row[ $field_key ];			
 
 			acf_update_value( $new_value, $post_id, $hide_layout_field );
 		}

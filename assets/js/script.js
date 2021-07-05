@@ -3,14 +3,26 @@
 
     if ( window.acf ) {
         window.acf.addAction( 'ready_field/type=flexible_content', function( field ) {
-            var hidden_layouts = window.acf_hide_layout_options.hidden_layouts[field.data.key];
+            var get_hidden_layouts = function ( field_name ) {
+                var hidden_layouts = [];
+                $.each( window.acf_hide_layout_options.hidden_layouts, function( key, layouts ) {
+                    if ( -1 !== field_name.indexOf( key ) ) {
+                        hidden_layouts = layouts;
+                        return false;
+                    }
+                });
+
+                return hidden_layouts;
+            };
 
             // for each layout in the flexible field
             field.$el.find( '.layout' ).each(function( i, element ) {
                 var $el = $( element ),
                     $controls = $el.find( '.acf-fc-layout-controls' ),
+                    $input = $el.find( 'input[type="hidden"]' ),
                     index = $el.attr( 'data-id' ),
-                    name = 'acf[' + field.data.key + '][' + index + '][acf_hide_layout]',
+                    name = $input.attr( 'name' ).replace( 'acf_fc_layout', 'acf_hide_layout' ),
+                    hidden_layouts = get_hidden_layouts( name ),
                     in_array = -1 !== $.inArray( index, hidden_layouts ),
                     is_hidden = in_array && 'acfcloneindex' !== index;
 

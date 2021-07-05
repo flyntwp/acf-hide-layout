@@ -19,7 +19,7 @@
             field.$el.find( '.layout' ).each(function( i, element ) {
                 var $el = $( element ),
                     $controls = $el.find( '.acf-fc-layout-controls' ),
-                    $input = $el.find( 'input[type="hidden"]' ),
+                    $input = $el.find( 'input[type="hidden"]' ).first(),
                     index = $el.attr( 'data-id' ),
                     name = $input.attr( 'name' ).replace( 'acf_fc_layout', 'acf_hide_layout' ),
                     hidden_layouts = get_hidden_layouts( name ),

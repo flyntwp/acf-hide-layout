@@ -3,7 +3,7 @@ Contributors: bleechberlin
 Tags: acf, advanced custom fields, flexible content, hide layout
 Requires at least: 4.7
 Tested up to: 5.8.2
-Stable tag: 1.1.1
+Stable tag: 1.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -48,6 +48,9 @@ The source code can be found on [GitHub](https://github.com/flyntwp/acf-hide-lay
 Made by people who brought to you [Flynt - The Component Based WordPress Starter Theme](https://flyntwp.com/?utm_source=WordPress%20Plugin%20Directory&utm_medium=Link&utm_campaign=ACF%20Hide%20Layout%20Plugin)
 
 == Changelog ==
+
+= 1.1 =
+* Fixed issue with cloning fields
 
 = 1.0.1 =
 * Added German translation

@@ -5,7 +5,7 @@
  * Description: Easily hide the layout of the flexible content on the frontend but still keep it in the backend.
  * Tags: acf, advanced custom fields, flexible content, hide layout
  * Version: 1.1
- * Author: bleech
+ * Author: Bleech
  * Author URI: https://bleech.de/
  * Text Domain: acf-hide-layout
  * Domain Path: /languages

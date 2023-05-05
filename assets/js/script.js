@@ -1,65 +1,71 @@
 (function( $ ) {
-    'use strict';
+  'use strict';
 
-    if ( window.acf ) {
-        window.acf.addAction( 'ready_field/type=flexible_content', function( field ) {
-            var get_hidden_layouts = function ( field_name ) {
-                var hidden_layouts = [];
-                $.each( window.acf_hide_layout_options.hidden_layouts, function( key, layouts ) {
-                    if ( -1 !== field_name.indexOf( key ) ) {
-                        hidden_layouts = layouts;
-                        return false;
-                    }
-                });
+  if ( window.acf ) {
+      window.acf.addAction( 'ready_field/type=flexible_content', function( field ) {
+          var get_hidden_layouts = function ( field_name ) {
+              var hidden_layouts = [];
+              $.each( window.acf_hide_layout_options.hidden_layouts, function( key, layouts ) {
+                  if ( -1 !== field_name.indexOf( key ) ) {
+                      hidden_layouts = layouts;
+                      return false;
+                  }
+              });
 
-                return hidden_layouts;
-            };
+              return hidden_layouts;
+          };
 
-            // for each layout in the flexible field
-            field.$el.find( '.layout' ).each(function( i, element ) {
-                var $el = $( element ),
-                    $controls = $el.find( '.acf-fc-layout-controls' ),
-                    $input = $el.find( 'input[type="hidden"]' ).first(),
-                    index = $el.attr( 'data-id' ),
-                    name = $input.attr( 'name' ).replace( 'acf_fc_layout', 'acf_hide_layout' ),
-                    hidden_layouts = get_hidden_layouts( name ),
-                    in_array = -1 !== $.inArray( index, hidden_layouts ),
-                    is_hidden = in_array && 'acfcloneindex' !== index;
+          // for each layout in the flexible field
+          field.$el.find( '.layout' ).each(function( i, element ) {
+              var $el = $( element ),
+                  $controls = $el.find( '.acf-fc-layout-controls' ).first(),
+                  $input = $el.find( 'input[type="hidden"]' ).first(),
+                  index = $el.attr( 'data-id' ),
+                  name = $input.attr( 'name' ).replace( 'acf_fc_layout', 'acf_hide_layout' ),
+                  hidden_layouts = get_hidden_layouts( name ),
+                  in_array = -1 !== $.inArray( index, hidden_layouts ),
+                  is_hidden = in_array && 'acfcloneindex' !== index;
 
-                var $input = $( '<input>', {
-                    type: 'hidden',
-                    name: name,
-                    class: 'acf-hide-layout',
-                    value: is_hidden ? '1' : '0',
-                });
+              if ($el.data('has-acf-hide-layout')) {
+                  return;
+              }
 
-                var $action = $( '<a>', {
-                    'data-index': index,
-                    'data-name': 'hide-layout',
-                    href: '#',
-                    title: window.acf_hide_layout_options.i18n.hide_layout,
-                    class: 'acf-icon dashicons acf-hide-layout small light acf-js-tooltip',
-                });
+              $el.attr('data-has-acf-hide-layout', true)
 
-                $action.prepend( $input );
-                $controls.prepend( $action );
+              var $input = $( '<input>', {
+                  type: 'hidden',
+                  name: name,
+                  class: 'acf-hide-layout',
+                  value: is_hidden ? '1' : '0',
+              });
 
-                if ( is_hidden ) {
-                    $el.addClass( 'acf-layout-hidden' );
-                }
-            });
-        });
-    }
+              var $action = $( '<a>', {
+                  'data-index': index,
+                  'data-name': 'hide-layout',
+                  href: '#',
+                  title: window.acf_hide_layout_options.i18n.hide_layout,
+                  class: 'acf-icon dashicons acf-hide-layout small light acf-js-tooltip',
+              });
 
-    $( document ).on( 'click', '.acf-hide-layout', function() {
-        var $el = $( this ),
-            $layout = $el.parents( '.layout' ),
-            $input = $el.find( '.acf-hide-layout' ),
-            value = $input.val(),
-            newValue = value === '1' ? '0' : '1';
+              $action.prepend( $input );
+              $controls.prepend( $action );
 
-        $input.val(newValue);
-        $layout.toggleClass( 'acf-layout-hidden', newValue );
-    });
+              if ( is_hidden ) {
+                  $el.addClass( 'acf-layout-hidden' );
+              }
+          });
+      });
+  }
+
+  $( document ).on( 'click', '.acf-hide-layout', function() {
+      var $el = $( this ),
+          $layout = $el.closest( '.layout' ),
+          $input = $el.find( '.acf-hide-layout' ),
+          value = $input.val(),
+          newValue = value === '1' ? '0' : '1';
+
+      $input.val(newValue);
+      $layout.toggleClass( 'acf-layout-hidden', newValue );
+  });
 
 })( jQuery );

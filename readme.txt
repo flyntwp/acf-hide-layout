@@ -2,7 +2,7 @@
 Contributors: bleechberlin
 Tags: acf, advanced custom fields, flexible content, hide layout
 Requires at least: 4.7
-Tested up to: 6.2
+Tested up to: 6.3
 Stable tag: 1.2
 Requires PHP: 5.6
 License: GPLv2 or later

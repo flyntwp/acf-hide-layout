@@ -41,6 +41,20 @@ class ACF_Hide_Layout {
 	protected $hidden_layouts = [];
 
 	/**
+     * File.
+     *
+     * @access protected
+     */
+    protected $file = '';
+
+    /**
+     * Basename.
+     *
+     * @access protected
+     */
+    protected $basename = '';
+
+	/**
 	 * A dummy magic method to prevent class from being cloned.
 	 *
 	 * @since  1.0

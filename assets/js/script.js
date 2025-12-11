@@ -1,7 +1,7 @@
 (function( $ ) {
   'use strict';
 
-  if ( window.acf ) {
+  if ( window.acf && window.acf_hide_layout_options.supports_disabled_layouts === 'false' ) {
       window.acf.addAction( 'ready_field/type=flexible_content', function( field ) {
           var get_hidden_layouts = function ( field_name ) {
               var hidden_layouts = [];

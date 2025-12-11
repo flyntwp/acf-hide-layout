@@ -41,6 +41,14 @@ class ACF_Hide_Layout {
 	protected $hidden_layouts = [];
 
 	/**
+	 * Layouts that will be disabled.
+	 *
+	 * @since  1.0
+	 * @access protected
+	 */
+	protected $disabled_layouts = [];
+
+	/**
 	 * File.
 	 *
 	 * @access protected
@@ -217,6 +225,7 @@ class ACF_Hide_Layout {
 		add_action( 'admin_footer', [ $this, 'admin_footer'] );
 		add_filter( 'acf/load_value/type=flexible_content', [ $this, 'load_value'], 10, 3 );
 		add_filter( 'acf/update_value/type=flexible_content', [ $this, 'update_value'], 10, 4 );
+		add_filter( 'acf/pre_load_metadata', [ $this, 'pre_load_metadata'], 10, 4 );
 	}
 
 	/**
@@ -255,6 +264,7 @@ class ACF_Hide_Layout {
 	public function admin_footer() {
 
 		$args = [
+			'supports_disabled_layouts' => $this->supports_disabled_layouts() ? 'true' : 'false',
 			'hidden_layouts' => $this->get_hidden_layouts(),
 			'i18n' => [
 				'hide_layout' => esc_html__( 'Hide / Show Layout', 'acf-hide-layout' ),
@@ -307,12 +317,16 @@ class ACF_Hide_Layout {
 			$is_hidden = acf_get_value( $post_id, $hide_layout_field );
 
 			if ( $is_hidden ) {
-				// used only on admin for javascript
-				$this->set_hidden_layout( $field['key'], $row );
+				if ( $this->supports_disabled_layouts() ) {
+					$this->disabled_layouts[ $field['name'] ][] = $row;
+				} else {
+					// used only on admin for javascript
+					$this->set_hidden_layout( $field['key'], $row );
 
-				// hide layout on frontend
-				if ( $this->is_request( 'frontend' ) ) {
-					unset( $layouts[ $row ] );
+					// hide layout on frontend
+					if ( $this->is_request( 'frontend' ) ) {
+						unset( $layouts[ $row ] );
+					}
 				}
 			}
 		}
@@ -348,7 +362,7 @@ class ACF_Hide_Layout {
 		foreach ( $rows as $key => $row ) {
 
 			// bail early if no layout reference
-			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) || !isset( $row[ $field_key ] ) ) {
+			if ( !is_array( $row ) || !isset( $row['acf_fc_layout'] ) ) {
 				continue;
 			}
 
@@ -357,13 +371,80 @@ class ACF_Hide_Layout {
 				'key' => "field_{$field_key}",
 			];
 
-			$new_value = $row[ $field_key ];
-
-			acf_update_value( $new_value, $post_id, $hide_layout_field );
+			if ( isset( $row[ $field_key ] ) ) {
+				$new_value = $row[ $field_key ];
+				acf_update_value( $new_value, $post_id, $hide_layout_field );
+			} else {
+				acf_delete_value( $post_id, $hide_layout_field );
+			}
 		}
 
 		return $rows;
 	}
+
+	/**
+	 * Pre load metadata.
+	 *
+	 * @since  1.3
+	 * @access public
+	 *
+	 * @param  mixed $null
+	 * @param  integer|string $post_id The post id.
+	 * @param  array $field The field array.
+	 * @param  boolean $hidden True if we should return the reference key.
+	 *
+	 * @return mixed $null
+	 */
+	public function pre_load_metadata( $null, $post_id, $field_name, $hidden ) {
+		if ( substr( $field_name, -12 ) === '_layout_meta' ) {
+			$key = ltrim( substr( $field_name, 0, -12 ), '_' );
+
+			if ( isset( $this->disabled_layouts[ $key ] ) ) {
+				// Decode the $post_id for $type and $id.
+				$decoded = acf_decode_post_id( $post_id );
+				$id      = $decoded['id'];
+				$type    = $decoded['type'];
+
+				// Bail early if no $id (possible during new acf_form).
+				if ( ! $id ) {
+					return null;
+				}
+
+				$meta_instance = acf_get_meta_instance( $type );
+
+				if ( ! $meta_instance ) {
+					return null;
+				}
+
+				$meta = $meta_instance->get_value( $id, [ 'name' => $field_name ] );
+
+				$disabled_layouts = array_unique( array_merge(
+					$meta['disabled'] ?? [],
+					$this->disabled_layouts[ $key ]
+				) );
+
+				$meta['disabled'] = $disabled_layouts;
+
+				return $meta;
+			}
+		}
+
+		return $null;
+	}
+
+	/**
+	 * Check if a native ACF disabled layouts feature is supported.
+	 *
+	 * @since  1.3
+	 * @access public
+	 *
+	 * @return boolean
+	 */
+	public function supports_disabled_layouts() {
+		$version = defined( 'ACF_VERSION' ) ? constant( 'ACF_VERSION' ) : '0';
+		return version_compare( $version, '6.5', '>=' );
+	}
+
 }
 
 ACF_Hide_Layout::instance();

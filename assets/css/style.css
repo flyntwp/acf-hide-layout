@@ -31,3 +31,195 @@
     background: rgba(0,0,0,.02);
     opacity: .7;
 }
+
+.acf-hide-layout-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.acf-hide-layout-modal.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.acf-hide-layout-modal__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.acf-hide-layout-modal__container {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.acf-hide-layout-modal__content {
+  position: relative;
+  padding: 20px;
+}
+
+.acf-hide-layout-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: color 0.2s ease;
+}
+
+.acf-hide-layout-modal__close:hover {
+  color: #000;
+}
+
+.acf-hide-layout-modal__close:focus-visible {
+  color: #000;
+  outline: 2px solid #2271b1;
+  outline-offset: 2px;
+}
+
+.acf-hide-layout-modal__close .dashicons {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.acf-hide-layout-modal__body {
+  padding-top: 10px;
+}
+
+.acf-hide-layout-modal__title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #1d2327;
+}
+
+.acf-hide-layout-modal__notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.acf-hide-layout-modal__notice .dashicons {
+  color: #646970;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.acf-hide-layout-modal__notice p {
+  margin: 0;
+}
+
+.acf-hide-layout-modal__progress-wrapper {
+  margin-bottom: 20px;
+}
+
+.acf-hide-layout-modal__message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-height: 30px;
+  padding: 0;
+}
+
+.acf-hide-layout-modal__message .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.acf-hide-layout-modal__message p {
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.acf-hide-layout-modal__message--success .dashicons {
+  color: #00a32a;
+}
+
+.acf-hide-layout-modal__message--warning .dashicons {
+  color: #dba617;
+}
+
+.acf-hide-layout-modal__message--error .dashicons {
+  color: #d63638;
+}
+
+.acf-hide-layout-modal__progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #f0f0f1;
+  border-radius: 10px;
+  overflow: visible;
+  position: relative;
+}
+
+.acf-hide-layout-modal__progress-fill {
+  height: 100%;
+  background-color: #2271b1;
+  transition: width 0.3s ease;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.acf-hide-layout-modal__progress-percentage {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  font-size: 11px;
+  font-weight: 400;
+  color: #1d2327;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.acf-hide-layout-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.acf-hide-layout-modal__migrate-button {
+  min-width: 100px;
+}

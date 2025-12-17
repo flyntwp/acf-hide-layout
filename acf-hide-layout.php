@@ -662,7 +662,6 @@ class ACF_Hide_Layout {
 					$total_migrated += count( $indexes );
 				} else {
 					$not_migrated = array_unique( array_merge( array_keys( $indexes ), $not_migrated ) );
-					error_log( 'not_migrated: ' . $is_updated . ' - ' . $post_id . ' - ' . $field_name . ' - ' . print_r( $indexes, true ) );
 				}
 			}
 		}

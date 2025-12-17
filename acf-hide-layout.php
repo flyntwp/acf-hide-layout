@@ -275,6 +275,7 @@ class ACF_Hide_Layout {
 			'i18n' => [
 				'hide_layout' => esc_html__( 'Hide / Show Layout', 'acf-hide-layout' ),
 				'migration_success' => _n_noop( 'Success! We migrated %s layout.', 'Success! We migrated %s layouts.', 'acf-hide-layout' ),
+				'delete_plugin' => esc_html__( 'You can now delete the ACF Hide Layout plugin.', 'acf-hide-layout' ),
 				'migrated' => _n_noop( 'We migrated %s layout.', 'We migrated %s layouts.', 'acf-hide-layout' ),
 				'not_migrated' => _n_noop( '%s layout could not be migrated.', '%s layouts could not be migrated.', 'acf-hide-layout' ),
 				'try_again' => esc_html__( 'Try Again', 'acf-hide-layout' ),

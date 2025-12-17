@@ -175,7 +175,11 @@
               $message
                   .addClass( messageClass )
                   .append( '<span class="dashicons dashicons-' + ( totalNotMigrated > 0 ? 'warning' : 'yes-alt' ) + '" aria-hidden="true"></span>' )
-                  .append( $( '<p>' ).text( messageText ) )
+                  .append(
+                      $( '<div>' )
+                          .append( $( '<p>' ).text( messageText ) )
+                          .append( totalNotMigrated === 0 ? $( '<p>' ).addClass( 'description' ).text( i18n.delete_plugin ) : '' )
+                  )
                   .show()
 
               // Show/enable try again button if some layouts couldn't be migrated

@@ -154,7 +154,6 @@
 .acf-hide-layout-modal__message {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 8px;
   min-height: 30px;
   padding: 0;
@@ -169,12 +168,18 @@
 
 .acf-hide-layout-modal__message p {
   margin: 0;
+}
+
+.acf-hide-layout-modal__message p:not(.description) {
   font-weight: 500;
   line-height: 1.5;
 }
 
 .acf-hide-layout-modal__message--success .dashicons {
   color: #00a32a;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .acf-hide-layout-modal__message--warning .dashicons {

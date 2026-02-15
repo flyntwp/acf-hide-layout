@@ -241,6 +241,13 @@ class ACF_Hide_Layout {
 	public function init() {
 		// Set up localisation.
 		$this->load_plugin_textdomain();
+		// Include and run migration script if in admin
+		if ($this->is_request('admin')) {
+			$migration_file = dirname($this->file) . '/migrate-to-acf-native.php';
+			if (file_exists($migration_file)) {
+				require_once $migration_file;
+			}
+		}
 	}
 
 	/**

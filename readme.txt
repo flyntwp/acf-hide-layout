@@ -1,6 +1,6 @@
 === ACF Hide Layout ===
 Contributors: bleechberlin
-Tags: acf, advanced custom fields, flexible content, hide layout
+Tags: acf, advanced custom fields, secure custom fields, flexible content, hide layout
 Requires at least: 4.7
 Tested up to: 6.9
 Stable tag: 1.3
@@ -16,6 +16,8 @@ Sometimes you may need to hide/remove a flexible content layout from showing on 
 
 Of course you can always just remove the layout, but if it’s a complex group of fields with a lot of data, re-creating it later would be a pain. And here the **ACF Hide Layout** plugin comes into play. It adds a small button with an "eye" icon to easily disable/enable flexible layout content without removing it.
 
+This plugin works with both Advanced Custom Fields and [Secure Custom Fields (SCF)](https://wordpress.org/plugins/secure-custom-fields/), the WordPress.org-maintained fork of ACF. Because SCF ships Flexible Content for free, you can use ACF Hide Layout without ACF Pro.
+
 See more info on the [plugin website](https://flyntwp.com/acf-hide-layout/)
 
 == Frequently Asked Questions ==
@@ -24,6 +26,10 @@ See more info on the [plugin website](https://flyntwp.com/acf-hide-layout/)
 
 Next to the flexible content options "Add Layout" and "Remove Layout" is a new option "Hide / Show Layout".
 Toggling that option will hide or show the layout on the fronted.
+
+= Does it work with Secure Custom Fields (SCF)? =
+
+Yes. SCF is a drop-in fork of ACF and keeps the same API, so ACF Hide Layout works with both. With SCF you also get Flexible Content for free, without ACF Pro.
 
 == Screenshots ==
 
@@ -34,7 +40,7 @@ Toggling that option will hide or show the layout on the fronted.
 == Requirements ==
 
 * [WordPress](https://wordpress.org/) >= 4.7
-* [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/) >= 5.7
+* [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/) >= 5.7, or [Secure Custom Fields (SCF)](https://wordpress.org/plugins/secure-custom-fields/)
 
 == Installation ==
 

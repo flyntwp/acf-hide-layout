@@ -2,8 +2,8 @@
 /*
  * Plugin Name: ACF Hide Layout
  * Plugin URI: https://flyntwp.com/acf-hide-layout/
- * Description: Easily hide the layout of the flexible content on the frontend but still keep it in the backend.
- * Tags: acf, advanced custom fields, flexible content, hide layout
+ * Description: Easily hide the layout of the flexible content on the frontend but still keep it in the backend. Works with Advanced Custom Fields and Secure Custom Fields (SCF).
+ * Tags: acf, advanced custom fields, secure custom fields, scf, flexible content, hide layout
  * Version: 1.3.0
  * Author: Bleech
  * Author URI: https://bleech.de/
@@ -223,6 +223,7 @@ class ACF_Hide_Layout {
 		add_action( 'init', [ $this, 'init' ], 0 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_footer', [ $this, 'admin_footer'] );
+		add_action( 'admin_notices', [ $this, 'maybe_show_dependency_notice' ] );
 		add_action( 'admin_notices', [ $this, 'maybe_show_admin_notice' ] );
 		add_action( 'wp_ajax_acf_hide_layout_dismiss_notice', [ $this, 'ajax_dismiss_notice' ] );
 		add_action( 'wp_ajax_acf_hide_layout_migrate_hidden_layouts', [ $this, 'ajax_migrate_hidden_layouts' ] );
@@ -486,6 +487,47 @@ class ACF_Hide_Layout {
 	public function supports_disabled_layouts() {
 		$version = defined( 'ACF_VERSION' ) ? constant( 'ACF_VERSION' ) : '0';
 		return version_compare( $version, '6.5', '>=' );
+	}
+
+	/**
+	 * Check if a compatible field framework (ACF or SCF) is active.
+	 *
+	 * Secure Custom Fields (SCF) is a drop-in fork of ACF that keeps the
+	 * `acf_*` API, the `acf/*` filters and the `ACF_VERSION` constant, so this
+	 * plugin works with either one.
+	 *
+	 * @since  1.4
+	 * @access public
+	 *
+	 * @return boolean
+	 */
+	public function dependency_active() {
+		return function_exists( 'acf_get_value' ) || class_exists( 'ACF' ) || defined( 'ACF_VERSION' );
+	}
+
+	/**
+	 * Show an admin notice when neither ACF nor SCF is active.
+	 *
+	 * @since  1.4
+	 * @access public
+	 */
+	public function maybe_show_dependency_notice() {
+		if ( $this->dependency_active() ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+
+		?>
+		<div class="notice notice-error">
+			<p>
+				<strong><?php esc_html_e( 'ACF Hide Layout', 'acf-hide-layout' ); ?>:</strong>
+				<?php esc_html_e( 'This plugin requires Advanced Custom Fields or Secure Custom Fields (SCF) to be installed and active.', 'acf-hide-layout' ); ?>
+			</p>
+		</div>
+		<?php
 	}
 
 	/**

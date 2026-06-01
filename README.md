@@ -16,7 +16,13 @@ Toggling that option will hide or show the layout on the fronted.
 
 ## Dependencies
 * [WordPress](https://wordpress.org/) >= 4.7
-* [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/) >= 5.7
+* [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/) >= 5.7, **or** [Secure Custom Fields (SCF)](https://wordpress.org/plugins/secure-custom-fields/)
+
+## Secure Custom Fields (SCF) compatibility
+
+ACF Hide Layout works with both Advanced Custom Fields and [Secure Custom Fields (SCF)](https://wordpress.org/plugins/secure-custom-fields/), the WordPress.org-maintained fork of ACF. SCF keeps ACF's PHP and JS API (the `acf_*` functions, the `acf/*` filters and the `ACF_VERSION` constant), so no extra setup is needed.
+
+Because SCF ships Flexible Content for free, you can use this plugin without ACF Pro.
 
 ## Install
 1. Clone this repo to `/wp-content/plugins`.
